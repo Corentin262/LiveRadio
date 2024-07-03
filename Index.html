@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Highlighter</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <iframe id="liveFrame" src="https://transcripts.recursiveprojects.cloud/archive/13552/110496"></iframe> <!-- Remplacez "URL_DE_LA_PAGE_LIVE" par l'URL de la page à surveiller -->
+    <script>
+        var textToHighlight = 'brak'; // Pré-définir le mot à surligner
+        var frame = document.getElementById('liveFrame');
+        frame.onload = function() {
+            setInterval(function() {
+                var bodyText = frame.contentWindow.document.body.innerHTML;
+                var highlightedText = bodyText.replace(new RegExp('(' + textToHighlight + ')', 'gi'), '<span style="background-color: yellow;">$1</span>');
+                frame.contentWindow.document.body.innerHTML = highlightedText;
+            }, 2000); // Répétez toutes les 2 secondes
+        };
+    </script>
+</body>
+</html>
+
+
+
